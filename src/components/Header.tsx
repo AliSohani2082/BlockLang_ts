@@ -12,8 +12,11 @@ import {
   Tooltip,
   MenuItem,
 } from '@mui/material'
+import { useTheme } from '@mui/material/styles';
 import CodeIcon from '@mui/icons-material/Code';
 import MenuIcon from '@mui/icons-material/Menu';
+
+const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -21,6 +24,9 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+  const theme = useTheme();
+  const colorMode = React.useContext(ColorModeContext);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -57,7 +63,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            BLOCKLANG
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -96,7 +102,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <CodeIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -113,7 +119,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            BLOCKLANG
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -161,4 +167,30 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
+
+// function MyApp() {
+//   const theme = useTheme();
+//   const colorMode = React.useContext(ColorModeContext);
+//   return (
+//     <Box
+//       sx={{
+//         display: 'flex',
+//         width: '100%',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         bgcolor: 'background.default',
+//         color: 'text.primary',
+//         borderRadius: 1,
+//         p: 3,
+//       }}
+//     >
+//       {theme.palette.mode} mode
+//       <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+//         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+//       </IconButton>
+//     </Box>
+//   );
+// }
+
 export default ResponsiveAppBar;
