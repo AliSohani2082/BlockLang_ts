@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Tabs, Tab } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
+import { TabPanel } from "../components";
 
 const HomePage = () => {
-  const [value, setValue] = useState<number>();
-  const files = useSelector<{ files: FileTab[] }, FileTab[]>((state) => state.files);
+  const [value, setValue] = useState<number>(0);
+  const files = useSelector<{ files: FileTab[] }, FileTab[]>((state) => state.directory.files);
 
   const handleChange = (v: number) => {
     setValue(v);
@@ -24,9 +25,9 @@ const HomePage = () => {
         ))}
       </Tabs>
       {files.map((file) => (
-        <div value={value} index={0}>
+        <TabPanel value={value} index={0}>
           Item One
-        </div>
+        </TabPanel>
       ))}
     </>
   );
