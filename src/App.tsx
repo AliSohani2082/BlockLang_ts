@@ -1,7 +1,8 @@
 import {IoIosCloseCircleOutline} from 'react-icons/io'
 import { useState } from 'react'
-import './App.css'
-import { Header, BlockMenu, DraggableTabsList, TabList } from './components'
+import { Box } from '@mui/material'
+// import './App.css'
+import { Header } from './components'
 import { Route, Routes } from 'react-router-dom'
 import { useSelector } from  'react-redux'
 import { Link } from 'react-router-dom'
@@ -13,12 +14,12 @@ function App() {
   const files = useSelector(state => state.directory.files);
   return (
     <>
-      <div className='flex flex-col align-items-stretch justify-start h-full m-0 p-0'>
+      <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <Header/>
         <Routes>
           <Route path='/*' element={<HomePage/>}/>
         </Routes>
-      </div>
+      </Box>
     </>
   )
 }
