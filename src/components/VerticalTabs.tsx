@@ -1,15 +1,11 @@
 import * as React from "react";
 import { Tooltip, Tab, Tabs, Typography, Box, Accordion, AccordionSummary, AccordionDetails, Paper} from "@mui/material";
+import { styled } from '@mui/material/styles';
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import PersonIcon from "@mui/icons-material/Person";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
+import SideBarSection from "./SideBarSection";
 
 const tabs: VerticalTab[] = [
   {
@@ -46,6 +42,11 @@ const tabs: VerticalTab[] = [
     content: "this is a page for robot",
   },
 ];
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -74,6 +75,64 @@ function a11yProps(index: number) {
   };
 }
 
+interface StyledTabsProps {
+  children?: React.ReactNode;
+  value: number;
+  onChange: (event: React.SyntheticEvent, newValue: number) => void;
+}
+
+const StyledTabs = styled((props: StyledTabsProps) => (
+  <Tabs
+    {...props}
+    orientation= 'vertical'
+    // TabIndicatorProps={{ children: <span cl  assName="MuiTabs-indicatorSpan" /> }}
+  />
+))(
+  ({ theme }) => ({
+    width: '50px',
+    textTransform: 'none',
+    minWidth: 0,
+    [theme.breakpoints.up('sm')]: {
+      minWidth: 0,
+    },
+    fontWeight: theme.typography.fontWeightRegular,
+    color: 'rgba(0, 0, 0, 0.85)',
+    '&:hover': {
+      color: '#40a9ff',
+      opacity: 1,
+    },
+    '&.Mui-selected': {
+      color: '#1890ff',
+      fontWeight: theme.typography.fontWeightMedium,
+    },
+    '&.Mui-focusVisible': {
+      backgroundColor: '#d1eaff',
+    },
+  }),
+);
+
+interface StyledTabProps {
+  label?: string;
+}
+
+const StyledTab = styled((props: StyledTabProps) => (
+  <Tab disableRipple {...props} />
+))(({ theme }) => ({
+  width: '50px',
+  textTransform: 'none',
+  fontWeight: theme.typography.fontWeightRegular,
+  fontSize: theme.typography.pxToRem(15),
+  marginRight: theme.spacing(1),
+  color: 'rgba(255, 255, 255, 0.7)',
+  '&.Mui-selected': {
+    color: '#fff',
+  },
+  '&.Mui-focusVisible': {
+    backgroundColor: 'rgba(100, 95, 228, 0.32)',
+  },
+}));
+
+
 export default function VerticalTabs() {
   const [value, setValue] = React.useState(0);
 
@@ -91,53 +150,31 @@ export default function VerticalTabs() {
         height: "100%",
       }}
     >
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
+      <StyledTabs
         value={value}
         onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{
-          borderRight: 1,
-          borderColor: "divider",
-          width: 50,
-          height: "100%",
-        }}
       >
         {tabs.map((tab, index) => (
           <Tooltip key={index} title={tab.name} placement="right" arrow>
             <Tab
               icon={tab.icon}
               aria-label={tab.name}
-              {...a11yProps(0)}
+              {...a11yProps(index)}
               sx={{ height: 50, width: 50 }}
             />
           </Tooltip>
         ))}
-      </Tabs>
-      <Box sx={{ width: 100 }}>
+      </StyledTabs>
+      <Box sx={{ width: 60 }}>
         {tabs.map((tab, index) => (
           <TabPanel key={index} value={value} index={index}>
             <Box sx={{ display: "flex", flexDirection: "column", padding: 0 }}>
               {typeof tab.content === "object" ? (
                 <Box sx={{ display: 'flex', flexDirection: 'column'}}>
                   {tab.content.map((content, index) => (
-                    <Accordion key={index}>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                        <Typography>{content.title}</Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        {typeof content.content === "object" && content.content.map((block, index2) => (
-                          <Paper key={index2} sx={{width: 30, height: 30}}>
-                            <Typography>{block.title}</Typography>
-                          </Paper>
-                        ))}
-                      </AccordionDetails>
-                    </Accordion>
+                    <SideBarSection title={content.title}>
+                      <div>this is good</div>
+                    </SideBarSection>
                   ))}
                 </Box>
               ) : (
@@ -150,56 +187,3 @@ export default function VerticalTabs() {
     </Box>
   );
 }
-
-// import * as React from 'react';
-// import Accordion from '@mui/material/Accordion';
-// import AccordionSummary from '@mui/material/AccordionSummary';
-// import AccordionDetails from '@mui/material/AccordionDetails';
-// import Typography from '@mui/material/Typography';
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-// export default function SimpleAccordion() {
-//   return (
-//     <div>
-//       <Accordion>
-//         <AccordionSummary
-//           expandIcon={<ExpandMoreIcon />}
-//           aria-controls="panel1a-content"
-//           id="panel1a-header"
-//         >
-//           <Typography>Accordion 1</Typography>
-//         </AccordionSummary>
-//         <AccordionDetails>
-//           <Typography>
-//             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-//             malesuada lacus ex, sit amet blandit leo lobortis eget.
-//           </Typography>
-//         </AccordionDetails>
-//       </Accordion>
-//       <Accordion>
-//         <AccordionSummary
-//           expandIcon={<ExpandMoreIcon />}
-//           aria-controls="panel2a-content"
-//           id="panel2a-header"
-//         >
-//           <Typography>Accordion 2</Typography>
-//         </AccordionSummary>
-//         <AccordionDetails>
-//           <Typography>
-//             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-//             malesuada lacus ex, sit amet blandit leo lobortis eget.
-//           </Typography>
-//         </AccordionDetails>
-//       </Accordion>
-//       <Accordion disabled>
-//         <AccordionSummary
-//           expandIcon={<ExpandMoreIcon />}
-//           aria-controls="panel3a-content"
-//           id="panel3a-header"
-//         >
-//           <Typography>Disabled Accordion</Typography>
-//         </AccordionSummary>
-//       </Accordion>
-//     </div>
-//   );
-// }

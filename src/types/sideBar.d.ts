@@ -6,5 +6,5 @@ type VerticalTab = {
 
 type Section ={
   title: string,
-  content: object
+  content: any
 }

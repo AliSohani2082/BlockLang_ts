@@ -1,9 +1,9 @@
-import BlockMenu from './BlockMenu'
 import Header from './Header'
-import TabPanel from './Tabs/TabPanel'
+import TabPanel from './TabPanel'
+import VerticalTabs from './VerticalTabs'
 
 export {
-  BlockMenu,
   Header,
   TabPanel,
+  VerticalTabs,
 }
