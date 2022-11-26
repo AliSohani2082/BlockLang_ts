@@ -8,3 +8,7 @@ type Section ={
   title: string,
   content: any
 }
+
+type Tab = {
+  fileId: number,
+}

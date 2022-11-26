@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: { files: FileTab[] } = {
+const initialState: { files: FileTab[]} = {
   files: [
     {
       id: 1,
@@ -8,6 +8,7 @@ const initialState: { files: FileTab[] } = {
       type: "executable",
       content: "this is main",
       isSaved: true,
+      isOpen: true,
     },
     {
       id: 2,
@@ -15,6 +16,7 @@ const initialState: { files: FileTab[] } = {
       type: "function",
       content: "this is a function",
       isSaved: false,
+      isOpen: false,
     },
     {
       id: 3,
@@ -22,6 +24,7 @@ const initialState: { files: FileTab[] } = {
       type: "function",
       content: "this is test function",
       isSaved: false,
+      isOpen: false,
     },
   ],
 };
@@ -39,6 +42,12 @@ const directorySlice = createSlice({
         state.files.filter((file) => file.id !== action.payload);
       }
     },
+    openTab(state, action){
+      state.files = state.files.map((file) => file.id == action.payload ? { ...file, isOpen: true}: file);
+    },
+    closeTab(state, action) {
+      state.files = state.files.map((file) => file.id == action.payload ? { ...file, isOpen: false}: file);
+    }
   },
 });
 

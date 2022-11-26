@@ -143,10 +143,9 @@ export default function VerticalTabs() {
   return (
     <Box
       sx={{
-        flexGrow: 1,
         bgcolor: "background.paper",
         display: "flex",
-        width: "20%",
+        width: "100%",
         height: "100%",
       }}
     >
@@ -155,26 +154,27 @@ export default function VerticalTabs() {
         onChange={handleChange}
       >
         {tabs.map((tab, index) => (
-          <Tooltip key={index} title={tab.name} placement="right" arrow>
+          <Tooltip key={index} title={tab.name} placement="right" arrow sx={{width: 50}}>
             <Tab
               icon={tab.icon}
               aria-label={tab.name}
               {...a11yProps(index)}
-              sx={{ height: 50, width: 50 }}
+              sx={{ height: 50, width: 'inherit' }}
             />
           </Tooltip>
         ))}
       </StyledTabs>
-      <Box sx={{ width: 60 }}>
+      <Box sx={{ width: '200px'}}>
         {tabs.map((tab, index) => (
           <TabPanel key={index} value={value} index={index}>
             <Box sx={{ display: "flex", flexDirection: "column", padding: 0 }}>
               {typeof tab.content === "object" ? (
-                <Box sx={{ display: 'flex', flexDirection: 'column'}}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', width: 'inherit'}}>
                   {tab.content.map((content, index) => (
-                    <SideBarSection title={content.title}>
-                      <div>this is good</div>
-                    </SideBarSection>
+                    // <SideBarSection title={content.title}>
+                    //   <div>this is good</div>
+                    // </SideBarSection>
+                    <Box sx={{width: '100%', height: '40', border: '3px solid black', background: 'gray'}}>ddd</Box>
                   ))}
                 </Box>
               ) : (

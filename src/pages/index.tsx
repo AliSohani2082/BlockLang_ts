@@ -17,8 +17,10 @@ const HomePage = () => {
   return (
     <Box sx={{ height: '100%' }}>
       <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', heigh: '100%'}}>
-        <VerticalTabs/>
         <Box>
+          <VerticalTabs/>
+        </Box>
+        <Box sx={{ background: 'blue', width: '100%' }}>
           
         </Box>
       </Box>

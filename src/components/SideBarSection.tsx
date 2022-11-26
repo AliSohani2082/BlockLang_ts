@@ -27,7 +27,6 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
     {...props}
   />
 ))(({ theme }) => ({
-  height: '40px',
   padding: 6,
   backgroundColor:
     theme.palette.mode === "dark"
