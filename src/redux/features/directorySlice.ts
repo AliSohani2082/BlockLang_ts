@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: { files: FileTab[]} = {
+const initialState: { files: FileTab[] } = {
   files: [
     {
       id: 1,
@@ -34,7 +34,8 @@ const directorySlice = createSlice({
   initialState,
   reducers: {
     addFile(state, action) {
-      state.files.concat([action.payload]);
+      console.log("action is called");
+      state.files.push(action.payload);
     },
     closeFile(state, action) {
       const file = state.files.find((file) => file.id === action.payload);
@@ -42,12 +43,16 @@ const directorySlice = createSlice({
         state.files.filter((file) => file.id !== action.payload);
       }
     },
-    openTab(state, action){
-      state.files = state.files.map((file) => file.id === action.payload ? { ...file, isOpen: true}: file);
+    openTab(state, action) {
+      state.files = state.files.map((file) =>
+        file.id === action.payload ? { ...file, isOpen: true } : file
+      );
     },
     closeTab(state, action) {
-      state.files = state.files.map((file) => file.id === action.payload ? { ...file, isOpen: false}: file);
-    }
+      state.files = state.files.map((file) =>
+        file.id === action.payload ? { ...file, isOpen: false } : file
+      );
+    },
   },
 });
 
