@@ -1,6 +1,6 @@
 type FileTab = {
   id: number;
-  name: string;
+  title: string;
   type: string;
   content: string;
   isSaved: boolean;

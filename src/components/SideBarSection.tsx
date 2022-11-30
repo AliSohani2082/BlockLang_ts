@@ -1,5 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
+import { Box } from '@mui/material'
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionSummary, {
@@ -11,7 +12,6 @@ import Typography from "@mui/material/Typography";
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
-  width: '100%',
   border: `1px solid ${theme.palette.divider}`,
   "&:not(:last-child)": {
     borderBottom: 0,
@@ -27,7 +27,9 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
     {...props}
   />
 ))(({ theme }) => ({
-  padding: 6,
+  fontSize: "3px",
+  padding: theme.spacing(0),
+  height: '20px',
   backgroundColor:
     theme.palette.mode === "dark"
       ? "rgba(255, 255, 255, .05)"
@@ -42,7 +44,7 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 }));
 
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
+  padding: theme.spacing(1),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
@@ -61,16 +63,18 @@ export default function SideBarSection(props: SideBarProps) {
     };
 
   return (
-    <Accordion
-      expanded={expanded === "panel1"}
-      onChange={handleChange("panel1")}
-    >
-      <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-        <Typography>{title}</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        {children}
-      </AccordionDetails>
-    </Accordion>
+    <Box sx={{ width: '200px' }}>
+      <Accordion
+        expanded={expanded === "panel1"}
+        onChange={handleChange("panel1")}
+      >
+        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Typography fontSize={12}>{title}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          {children}
+        </AccordionDetails>
+      </Accordion>
+    </Box>
   );
 }

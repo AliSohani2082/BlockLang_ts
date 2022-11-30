@@ -4,7 +4,7 @@ const initialState: { files: FileTab[]} = {
   files: [
     {
       id: 1,
-      name: "main",
+      title: "main",
       type: "executable",
       content: "this is main",
       isSaved: true,
@@ -12,15 +12,15 @@ const initialState: { files: FileTab[]} = {
     },
     {
       id: 2,
-      name: "function",
+      title: "function",
       type: "function",
       content: "this is a function",
       isSaved: false,
-      isOpen: false,
+      isOpen: true,
     },
     {
       id: 3,
-      name: "test",
+      title: "test",
       type: "function",
       content: "this is test function",
       isSaved: false,
@@ -37,19 +37,19 @@ const directorySlice = createSlice({
       state.files.concat([action.payload]);
     },
     closeFile(state, action) {
-      const file = state.files.filter((file) => file.id === action.payload)[0];
-      if (file.isSaved) {
+      const file = state.files.find((file) => file.id === action.payload);
+      if (file?.isSaved) {
         state.files.filter((file) => file.id !== action.payload);
       }
     },
     openTab(state, action){
-      state.files = state.files.map((file) => file.id == action.payload ? { ...file, isOpen: true}: file);
+      state.files = state.files.map((file) => file.id === action.payload ? { ...file, isOpen: true}: file);
     },
     closeTab(state, action) {
-      state.files = state.files.map((file) => file.id == action.payload ? { ...file, isOpen: false}: file);
+      state.files = state.files.map((file) => file.id === action.payload ? { ...file, isOpen: false}: file);
     }
   },
 });
 
-export const { addFile, closeFile } = directorySlice.actions;
+export const { addFile, closeFile, openTab, closeTab } = directorySlice.actions;
 export default directorySlice.reducer;

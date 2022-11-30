@@ -61,7 +61,7 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box sx={{ p: 0, width: 400 }}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
@@ -171,10 +171,9 @@ export default function VerticalTabs() {
               {typeof tab.content === "object" ? (
                 <Box sx={{ display: 'flex', flexDirection: 'column', width: 'inherit'}}>
                   {tab.content.map((content, index) => (
-                    // <SideBarSection title={content.title}>
-                    //   <div>this is good</div>
-                    // </SideBarSection>
-                    <Box sx={{width: '100%', height: '40', border: '3px solid black', background: 'gray'}}>ddd</Box>
+                    <SideBarSection key={index} title={content.title}>
+                      <div>this is good</div>
+                    </SideBarSection>
                   ))}
                 </Box>
               ) : (
