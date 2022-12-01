@@ -4,6 +4,7 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import { useSelector, useDispatch } from "react-redux";
 import { TabPanel } from "../components";
 import VerticalTabs from "../components/VerticalTabs";
+import FileEditor from "../components/FileEditor/FileEditor";
 
 const HomePage = () => {
   const [value, setValue] = useState<number>(0);
@@ -20,7 +21,7 @@ const HomePage = () => {
       sx={{
         display: "flex",
         flexDirection: "row",
-        alignItems: 'stretch',
+        alignItems: "stretch",
         width: "100%",
         heigh: "100vh",
         background: "red",
@@ -38,6 +39,7 @@ const HomePage = () => {
         }}
       >
         <TabPanel />
+        <FileEditor />
       </Box>
     </Box>
     // {/* <Tabs

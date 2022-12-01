@@ -34,7 +34,6 @@ const directorySlice = createSlice({
   initialState,
   reducers: {
     addFile(state, action) {
-      console.log("action is called");
       state.files.push(action.payload);
     },
     closeFile(state, action) {
