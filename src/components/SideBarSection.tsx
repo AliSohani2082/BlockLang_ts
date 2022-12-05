@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import { Box } from '@mui/material'
+import { Box } from "@mui/material";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionSummary, {
@@ -27,9 +27,10 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
     {...props}
   />
 ))(({ theme }) => ({
+  minHeight: 0,
   fontSize: "3px",
   padding: theme.spacing(0),
-  height: '20px',
+  height: "20px",
   backgroundColor:
     theme.palette.mode === "dark"
       ? "rgba(255, 255, 255, .05)"
@@ -63,7 +64,7 @@ export default function SideBarSection(props: SideBarProps) {
     };
 
   return (
-    <Box sx={{ width: '200px' }}>
+    <Box sx={{ width: "200px" }}>
       <Accordion
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}
@@ -71,9 +72,7 @@ export default function SideBarSection(props: SideBarProps) {
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Typography fontSize={12}>{title}</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          {children}
-        </AccordionDetails>
+        <AccordionDetails>{children}</AccordionDetails>
       </Accordion>
     </Box>
   );

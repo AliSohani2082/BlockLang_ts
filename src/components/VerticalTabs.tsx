@@ -1,10 +1,20 @@
 import * as React from "react";
-import { Tooltip, Tab, Tabs, Typography, Box, Accordion, AccordionSummary, AccordionDetails, Paper} from "@mui/material";
-import { styled } from '@mui/material/styles';
+import {
+  Tooltip,
+  Tab,
+  Tabs,
+  Typography,
+  Box,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Paper,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import PersonIcon from "@mui/icons-material/Person";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SideBarSection from "./SideBarSection";
 
 const tabs: VerticalTab[] = [
@@ -59,11 +69,7 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 0, width: 400 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 0, width: 400 }}>{children}</Box>}
     </div>
   );
 }
@@ -84,32 +90,30 @@ interface StyledTabsProps {
 const StyledTabs = styled((props: StyledTabsProps) => (
   <Tabs
     {...props}
-    orientation= 'vertical'
+    orientation="vertical"
     // TabIndicatorProps={{ children: <span cl  assName="MuiTabs-indicatorSpan" /> }}
   />
-))(
-  ({ theme }) => ({
-    width: '50px',
-    textTransform: 'none',
+))(({ theme }) => ({
+  // width: '50px',
+  textTransform: "none",
+  minWidth: 0,
+  [theme.breakpoints.up("sm")]: {
     minWidth: 0,
-    [theme.breakpoints.up('sm')]: {
-      minWidth: 0,
-    },
-    fontWeight: theme.typography.fontWeightRegular,
-    color: 'rgba(0, 0, 0, 0.85)',
-    '&:hover': {
-      color: '#40a9ff',
-      opacity: 1,
-    },
-    '&.Mui-selected': {
-      color: '#1890ff',
-      fontWeight: theme.typography.fontWeightMedium,
-    },
-    '&.Mui-focusVisible': {
-      backgroundColor: '#d1eaff',
-    },
-  }),
-);
+  },
+  fontWeight: theme.typography.fontWeightRegular,
+  color: "rgba(0, 0, 0, 0.85)",
+  "&:hover": {
+    color: "#40a9ff",
+    opacity: 1,
+  },
+  "&.Mui-selected": {
+    color: "#1890ff",
+    fontWeight: theme.typography.fontWeightMedium,
+  },
+  "&.Mui-focusVisible": {
+    backgroundColor: "#d1eaff",
+  },
+}));
 
 interface StyledTabProps {
   label?: string;
@@ -118,20 +122,23 @@ interface StyledTabProps {
 const StyledTab = styled((props: StyledTabProps) => (
   <Tab disableRipple {...props} />
 ))(({ theme }) => ({
-  width: '50px',
-  textTransform: 'none',
+  // width: '50px',
+  textTransform: "none",
+  minwidth: 0,
   fontWeight: theme.typography.fontWeightRegular,
   fontSize: theme.typography.pxToRem(15),
   marginRight: theme.spacing(1),
-  color: 'rgba(255, 255, 255, 0.7)',
-  '&.Mui-selected': {
-    color: '#fff',
+  color: "rgba(255, 255, 255, 0.7)",
+  "&.Mui-selected": {
+    color: "#fff",
   },
-  '&.Mui-focusVisible': {
-    backgroundColor: 'rgba(100, 95, 228, 0.32)',
+  "&.Mui-focusVisible": {
+    backgroundColor: "rgba(100, 95, 228, 0.32)",
+  },
+  ".tab_button": {
+    minWidth: 0,
   },
 }));
-
 
 export default function VerticalTabs() {
   const [value, setValue] = React.useState(0);
@@ -149,27 +156,36 @@ export default function VerticalTabs() {
         height: "100%",
       }}
     >
-      <StyledTabs
-        value={value}
-        onChange={handleChange}
-      >
+      <StyledTabs value={value} onChange={handleChange}>
         {tabs.map((tab, index) => (
-          <Tooltip key={index} title={tab.name} placement="right" arrow sx={{width: 50}}>
+          <Tooltip
+            key={index}
+            title={tab.name}
+            placement="right"
+            arrow
+            sx={{ width: 50 }}
+          >
             <Tab
               icon={tab.icon}
               aria-label={tab.name}
               {...a11yProps(index)}
-              sx={{ height: 50, width: 'inherit' }}
+              sx={{ height: 50, width: "inherit", minWidth: 0 }}
             />
           </Tooltip>
         ))}
       </StyledTabs>
-      <Box sx={{ width: '200px'}}>
+      <Box sx={{ width: "200px" }}>
         {tabs.map((tab, index) => (
           <TabPanel key={index} value={value} index={index}>
             <Box sx={{ display: "flex", flexDirection: "column", padding: 0 }}>
               {typeof tab.content === "object" ? (
-                <Box sx={{ display: 'flex', flexDirection: 'column', width: 'inherit'}}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "inherit",
+                  }}
+                >
                   {tab.content.map((content, index) => (
                     <SideBarSection key={index} title={content.title}>
                       <div>this is good</div>

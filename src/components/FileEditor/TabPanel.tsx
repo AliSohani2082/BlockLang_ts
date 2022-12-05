@@ -14,9 +14,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import { useSelector, useDispatch } from "react-redux";
 import { closeTab, addFile } from "../../redux/features/directorySlice";
+import { useNavigate } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.h5,
+  cursor: "pointer",
   borderRadius: 0,
   height: "33px",
   display: "flex",
@@ -30,6 +32,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function TabPanel() {
+  const navigate = useNavigate();
   const files = useSelector((state) => state.directory.files);
   const [openModal, setOpenModal] = React.useState(false);
   const [title, setTitle] = React.useState("");
@@ -59,6 +62,7 @@ function TabPanel() {
   const handleAddTab = (e: any) => {
     e.preventDefault();
     setOpenModal(true);
+    setTitle("");
   };
 
   const handleCloseModal = () => {
@@ -79,7 +83,11 @@ function TabPanel() {
         {files
           .filter((file: FileTab) => file.isOpen)
           .map((tab: FileTab) => (
-            <Item onDoubleClick={(e) => handleRename(e)} key={tab.id}>
+            <Item
+              onDoubleClick={(e) => handleRename(e)}
+              onClick={(e) => navigate(`/${tab.title}`)}
+              key={tab.id}
+            >
               <Typography>{tab.title}</Typography>
               <IconButton
                 size="small"

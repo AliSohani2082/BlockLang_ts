@@ -12,12 +12,13 @@ function App() {
   return (
     <Box
       sx={{
-        height: '100vh',
-        widows: '100vh',
+        height: "100vh",
+        width: "100vw",
         margin: 0,
         display: "flex",
         flexDirection: "column",
-        background: 'black'
+        scrollbarColor: "red",
+        background: "grey",
       }}
     >
       <Header />
